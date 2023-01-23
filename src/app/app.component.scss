@@ -1,0 +1,12 @@
+@import '/src/assets/styles/mixins.scss';
+
+.main-container {
+    @include flexRow(center, center, 10px);
+    flex-wrap: wrap;
+    padding: 20px 0;
+
+    .pokemon-card {
+        color: #e4e4e4;
+        border-radius: 10px;
+    }
+}

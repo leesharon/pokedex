@@ -1,0 +1,21 @@
+.img-container {
+    width: 130px;
+    height: 130px;
+    background-color: #525252;
+    border: #232323 solid 1px;
+}
+
+.pokemon-overview {
+    background-color: #232323;
+    padding: 10px;
+
+    .header {
+        display: flex;
+        justify-content: space-between;
+    }
+
+    .type {
+        display: flex;
+        justify-content: space-between;
+    }
+}

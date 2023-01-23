@@ -1,0 +1,6 @@
+@mixin flexRow ($justify: center, $align: center, $gap: 0) {
+    display: flex;
+    gap: $gap;
+    justify-content: $justify;
+    align-items: $align;
+}

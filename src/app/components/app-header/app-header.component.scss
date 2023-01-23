@@ -1,0 +1,10 @@
+@import '/src/assets/styles/variables.scss';
+@import '/src/assets/styles/mixins.scss';
+
+.app-header {
+    background-color: $blue-primary;
+    height: 80px;
+    padding: 0 20px;
+    font-size: $fs-xlarge;
+    @include flexRow(flex-start);
+}
