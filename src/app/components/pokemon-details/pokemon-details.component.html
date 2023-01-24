@@ -1,1 +1,27 @@
-<p>pokemon-details works!</p>
+<main class="main-container" *ngIf="pokemon">
+    <button class="back-button" (click)="goBack()">⏪</button>
+    <h1>{{pokemon.name}}</h1>
+    <div class="pokemon-details">
+        <div class="img-container">
+            <img src="{{pokemon.imageURL}}" alt="pokemon">
+        </div>
+        <div class="details">
+            <div class="details-item">
+                <span>Height:</span>
+                <span>{{pokemon.height}}</span>
+            </div>
+            <div class="details-item">
+                <span>Weight:</span>
+                <span>{{pokemon.weight}}</span>
+            </div>
+            <div class="details-item">
+                <span>Abilities:</span>
+                <span>{{pokemon.abilities}}</span>
+            </div>
+            <div class="details-item">
+                <span>Type:</span>
+                <span>{{pokemon.type}}</span>
+            </div>
+        </div>
+    </div>
+</main>

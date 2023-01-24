@@ -14,21 +14,27 @@ export class PokemonService {
   apiUrl = 'https://pokeapi.co/api/v2/pokemon/'
 
   getPokemons(): Observable<Pokemon[]> {
-    return this.http.get<{ results: Pokemon[] }>(this.apiUrl + `?offset=0&limit=100`).pipe(
-      map(res => {
-        return res.results.map((pokemon, idx) => {
-          return {
-            name: pokemon.name.at(0).toUpperCase() + pokemon.name.slice(1),
-            imageURL: `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${pokemon.url.split('/')[6]}.png`,
-            idx
-          }
+    return this.http.get<{ results: Pokemon[] }>(this.apiUrl + `?offset=0&limit=100`)
+      .pipe(
+        map(res => {
+          return res.results.map((pokemon, idx) => {
+            const data = {
+              name: pokemon.name.at(0).toUpperCase() + pokemon.name.slice(1),
+              imageURL: `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${pokemon.url.split('/')[6]}.png`,
+              idx,
+              type: ''
+            }
+            this.http.get(pokemon.url)
+              .pipe(map((res: { types }) => res.types[0].type.name))
+              .subscribe(res => data.type = res)
+            return data
+          })
         })
-      })
-    )
+      )
   }
 
   getPokemon(idx: number): Observable<Pokemon> {
-    return this.http.get<any>(`https://pokeapi.co/api/v2/pokemon/${idx}`).pipe(
+    return this.http.get<any>(this.apiUrl + idx).pipe(
       map(res => {
         return {
           idx,

@@ -1,18 +1,60 @@
-@import '/src/assets/styles/mixins.scss';
+@import '/src/assets/styles/mixins';
+@import '/src/assets/styles/variables';
 
-.pokemon-list {
-    @include flexRow(center, center, 10px);
-    flex-wrap: wrap;
-    padding: 20px 0;
 
-    .pokemon-card {
-        color: #e4e4e4;
-        border-radius: 10px;
-        cursor: pointer;
-        transition: transform .2s ease-in-out;
+.page-container {
+    @include flexColumn(center);
 
-        &:hover {
-            transform: scale(1.05);
+    .search-bar {
+        width: 50%;
+        padding: 10px 20px;
+        border: 2px solid $red-primary;
+        border-radius: 9999px;
+        margin-top: 30px;
+    }
+
+    .type-filter {
+        margin-left: auto;
+        margin-top: 20px;
+        margin-right: 50px;
+        position: relative;
+
+        select {
+            padding: 5px 10px;
+            border: 2px solid black;
+            border-radius: 9999px;
+            margin-left: 10px;
+            cursor: pointer;
+        }
+
+        &::after {
+            content: "˅";
+            position: absolute;
+            right: 10px;
+            top: 60%;
+            transform: translateY(-50%);
+            font-size: 25px;
+            color: black;
+            cursor: pointer;
+        }
+
+
+    }
+
+    .pokemon-list {
+        @include flexRow(center, center, 10px);
+        flex-wrap: wrap;
+        padding: 20px 0;
+
+        .pokemon-card {
+            color: #e4e4e4;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: transform .2s ease-in-out;
+
+            &:hover {
+                transform: scale(1.05);
+            }
         }
     }
 }

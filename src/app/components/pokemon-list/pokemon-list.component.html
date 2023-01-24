@@ -1,4 +1,14 @@
-<main class="pokemon-list">
-    <pokemon-card class="pokemon-card" *ngFor="let pokemon of pokemons" [routerLink]="['/pokemon', pokemon.idx]"
-        [pokemon]="pokemon"></pokemon-card>
-</main>
+<div class="page-container">
+    <input class="search-bar" [(ngModel)]="searchTerm" placeholder="Search for a Pokemon...">
+    <div class="type-filter">
+        <span>Filter by:</span>
+        <select [(ngModel)]="selectedType">
+            <option value="">All</option>
+            <option *ngFor="let type of types" [value]="type">{{type}}</option>
+        </select>
+    </div>
+    <section class="pokemon-list">
+        <pokemon-card class="pokemon-card" *ngFor="let pokemon of filterPokemons()"
+            [routerLink]="['/pokemon', pokemon.idx]" [pokemon]="pokemon"></pokemon-card>
+    </section>
+</div>

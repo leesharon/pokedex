@@ -1,0 +1,39 @@
+@import 'src/assets/styles/mixins';
+
+.main-container {
+    margin-top: 30px;
+    position: relative;
+
+    @include flexColumn();
+
+    .back-button {
+        position: absolute;
+        left: 40px;
+        font-size: 25px;
+    }
+
+    h1 {
+        font-size: 50px;
+        font-weight: 600;
+        margin-bottom: 20px;
+        text-align: center;
+    }
+
+    .pokemon-details {
+        width: 60%;
+
+        .img-container {
+            height: 200px;
+            width: 200px;
+            margin: auto;
+        }
+
+        .details {
+            @include flexColumn(unset, 10px);
+        }
+
+        .details-item {
+            @include flexRow(space-between, center);
+        }
+    }
+}
