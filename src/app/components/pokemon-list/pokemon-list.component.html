@@ -1,0 +1,4 @@
+<main class="pokemon-list">
+    <pokemon-card class="pokemon-card" *ngFor="let pokemon of pokemons" [routerLink]="['/pokemon', pokemon.idx]"
+        [pokemon]="pokemon"></pokemon-card>
+</main>
