@@ -2,7 +2,16 @@ import { Injectable } from '@angular/core'
 import { Pokemon } from '../models/pokemon'
 import { HttpClient } from '@angular/common/http'
 import { map, Observable } from 'rxjs'
+import { PokemonDetails } from '../models/pokemon-details'
 
+interface ApiResponse {
+  name: string
+  height: number
+  weight: number
+  types: { type: { name: string } }[]
+  abilities: { ability: { name: string } }[]
+  sprites: { front_default: string }
+}
 
 @Injectable({
   providedIn: 'root'
@@ -20,7 +29,7 @@ export class PokemonService {
           return res.results.map((pokemon, idx) => {
             const data = {
               name: pokemon.name.at(0).toUpperCase() + pokemon.name.slice(1),
-              imageURL: `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${pokemon.url.split('/')[6]}.png`,
+              url: `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${pokemon.url.split('/')[6]}.png`,
               idx,
               type: ''
             }
@@ -33,18 +42,18 @@ export class PokemonService {
       )
   }
 
-  getPokemon(idx: number): Observable<Pokemon> {
-    return this.http.get<any>(this.apiUrl + idx).pipe(
-      map(res => {
+  getPokemon(idx: number): Observable<PokemonDetails> {
+    return this.http.get<ApiResponse>(this.apiUrl + idx).pipe(
+      map(pokemon => {
         return {
           idx,
-          name: res.name,
-          height: res.height,
-          weight: res.weight,
-          type: res.types[0].type.name,
-          abilities: res.abilities.map(ability => ability.ability.name),
-          imageURL: res.sprites.front_default
-        }
+          name: pokemon.name,
+          height: pokemon.height,
+          weight: pokemon.weight,
+          type: pokemon.types[0].type.name,
+          abilities: pokemon.abilities.map(ability => ability.ability.name),
+          url: pokemon.sprites.front_default
+        } as unknown as PokemonDetails
       })
     )
   }
